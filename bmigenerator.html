@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+        }
+
+            .info{
+                display:none;
+            }
+    </style>
+</head>
+<body>
+    <span><h1>BMI Calculator</h1></span>
+    <form id="form">
+
+        Height in CM <input type="text" id="height">
+        Weight in KGs <input type="text" id="weight">
+    <button>Calculate</button>
+    </form>
+    
+    <span class="info">
+        <h2>
+            <div class="bmi"></div>
+            <div class="condition"></div>
+        </h2>
+    </span>
+</body>
+<script>
+    const form=document.querySelector('#form');
+    form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const height=parseFloat(document.querySelector('#height').value);
+        const weight=parseFloat(document.querySelector('#weight').value);
+        // console.log(height);
+        // console.log(weight);
+        const bmi=document.querySelector('.bmi');
+        const info=document.querySelector('.info');
+        info.style.display='flex';
+        if (height=== '' || height <0 || isNaN(height)){
+            bmi.innerHTML="please give correct height value"
+        }
+
+        else if (weight=== '' || weight <0 || isNaN(weight)){
+            bmi.innerHTML="please give correct Weight value"
+        }
+
+        else{
+            const BMI=(weight/((height*height)/10000)).toFixed(2);
+            // console.log(BMI);
+            bmi.innerHTML="BMI:-"+BMI;
+        const condition=document.querySelector('.condition');
+        if (BMI<=18.6)
+        {
+            condition.innerHTML="You are Underweight"
+            condition.style.color='red';
+        }
+
+        if (BMI>18.6 && BMI <=22.5)
+        {
+            condition.innerHTML="You are Normal weighted"
+            condition.style.color='green';
+        }
+
+        if (BMI>22.5)
+        {
+            condition.innerHTML="You are Overweight"
+            condition.style.color='red';
+        }
+
+    }
+
+    })
+</script>
+</html>
